@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=1024" />
+  <title>Certifications | Rohit's Portfolio</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Header/Navbar -->
+  <header>
+    <div class="logo">
+      <img src="images/rohit-logo.jpg" class="circle-logo large-logo" alt="Logo" />
+      About<span>Me.</span>
+    </div>
+    <nav class="navbar">
+      <a href="index.html">Home</a>
+      <a href="resume.html">Resume</a>
+      <a href="skills.html">Skills</a>
+      <a href="projects.html">Projects</a>
+      <a href="certifications.html" class="active">Certifications</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <!-- Certifications Section -->
+  <section class="certifications-section">
+    <h2 class="certifications-title">My Certifications</h2>
+
+    <div class="certification-grid" id="certificationGrid">
+      <!-- Certificates will be rendered here -->
+    </div>
+
+    <button class="add-certificate-btn" onclick="addCertificate()">+ Add Certificate</button>
+  </section>
+
+  <script>
+    // Load certificates from localStorage
+    window.onload = function () {
+      const saved = JSON.parse(localStorage.getItem('certificates')) || [];
+      saved.forEach(cert => createCertificateCard(cert.name, cert.image));
+    };
+
+    function addCertificate() {
+      createCertificateCard();
+    }
+
+    function createCertificateCard(name = '', imageSrc = 'images/default-certificate.jpg') {
+      const grid = document.getElementById('certificationGrid');
+
+      const card = document.createElement('div');
+      card.className = 'certification-card';
+
+      const removeBtn = document.createElement('button');
+      removeBtn.className = 'remove-btn';
+      removeBtn.innerHTML = '❌';
+      removeBtn.onclick = () => {
+        card.remove();
+        saveCertificates(); // Update storage
+      };
+
+      const img = document.createElement('img');
+      img.src = imageSrc;
+      img.alt = 'Certificate';
+      img.onclick = () => uploadImage(img);
+
+      const input = document.createElement('input');
+      input.type = 'text';
+      input.placeholder = 'Certificate Name';
+      input.value = name;
+      input.oninput = saveCertificates;
+
+      card.appendChild(removeBtn);
+      card.appendChild(img);
+      card.appendChild(input);
+      grid.appendChild(card);
+
+      // Save when new cert added
+      saveCertificates();
+    }
+
+    function uploadImage(imgElement) {
+      const fileInput = document.createElement('input');
+      fileInput.type = 'file';
+      fileInput.accept = 'image/*';
+      fileInput.onchange = () => {
+        const file = fileInput.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = () => {
+            imgElement.src = reader.result;
+            saveCertificates(); // Save after change
+          };
+          reader.readAsDataURL(file);
+        }
+      };
+      fileInput.click();
+    }
+
+    function saveCertificates() {
+      const cards = document.querySelectorAll('.certification-card');
+      const data = [];
+      cards.forEach(card => {
+        const name = card.querySelector('input').value;
+        const image = card.querySelector('img').src;
+        data.push({ name, image });
+      });
+      localStorage.setItem('certificates', JSON.stringify(data));
+    }
+  </script>
+</body>
+</html>

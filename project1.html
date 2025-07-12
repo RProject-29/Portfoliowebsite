@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=1024" />
+  <title>Project 1 | Rohit's Portfolio</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Header/Navbar -->
+  <header>
+    <div class="logo">
+      <img src="images/rohit-logo.jpg" class="circle-logo large-logo" alt="Logo" />
+      About<span>Me.</span>
+    </div>
+    <nav class="navbar">
+      <a href="index.html">Home</a>
+      <a href="resume.html">Resume</a>
+      <a href="skills.html">Skills</a>
+      <a href="projects.html" class="active">Projects</a>
+      <a href="certifications.html">Certifications</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <!-- Project Detail Section -->
+  <section class="project-section">
+    <div class="project-box">
+      <!-- Left Side -->
+      <div class="project-left">
+        <input type="text" id="projectTitle" class="input-field project-title" placeholder="Enter Project Title" />
+        <textarea id="projectDescription" class="textarea-field" placeholder="Write about the project..."></textarea>
+        <input type="text" id="githubLink" class="input-field" placeholder="GitHub Project Link" />
+        <input type="text" id="githubName" class="input-field" placeholder="Name of GitHub Project" />
+      </div>
+
+      <!-- Right Side -->
+      <div class="project-right">
+        <div class="photo-box upload-photo-frame">
+          <img id="project1Image" src="images/default-project.jpg" alt="Project" />
+          <label for="project1ImageInput" class="upload-btn plus-overlay">+</label>
+          <input type="file" id="project1ImageInput" accept="image/*" style="display:none" onchange="loadProject1Image(event)" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Arrow Navigation -->
+    <div class="project-nav-arrows">
+      <a href="project2.html" class="arrow-btn">→</a>
+    </div>
+  </section>
+
+  <!-- JavaScript -->
+  <script>
+    // Save input to localStorage
+    function saveData() {
+      localStorage.setItem("projectTitle", document.getElementById("projectTitle").value);
+      localStorage.setItem("projectDescription", document.getElementById("projectDescription").value);
+      localStorage.setItem("githubLink", document.getElementById("githubLink").value);
+      localStorage.setItem("githubName", document.getElementById("githubName").value);
+    }
+
+    // Load saved data when page opens
+    window.onload = function() {
+      document.getElementById("projectTitle").value = localStorage.getItem("projectTitle") || "";
+      document.getElementById("projectDescription").value = localStorage.getItem("projectDescription") || "";
+      document.getElementById("githubLink").value = localStorage.getItem("githubLink") || "";
+      document.getElementById("githubName").value = localStorage.getItem("githubName") || "";
+
+      // Load saved image
+      const savedImage = localStorage.getItem("project1Image");
+      if (savedImage) {
+        document.getElementById("project1Image").src = savedImage;
+      }
+    }
+
+    // Upload image & save to localStorage
+    function loadProject1Image(event) {
+      const file = event.target.files[0];
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const imgSrc = e.target.result;
+        document.getElementById("project1Image").src = imgSrc;
+        localStorage.setItem("project1Image", imgSrc);
+      };
+      if (file) reader.readAsDataURL(file);
+    }
+
+    // Save live text input
+    document.addEventListener("DOMContentLoaded", () => {
+      document.getElementById("projectTitle").addEventListener("input", saveData);
+      document.getElementById("projectDescription").addEventListener("input", saveData);
+      document.getElementById("githubLink").addEventListener("input", saveData);
+      document.getElementById("githubName").addEventListener("input", saveData);
+    });
+  </script>
+</body>
+</html>

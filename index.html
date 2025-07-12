@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=1024" />
+  <title>Rohit's Portfolio</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    /* Extra CSS to match changes */
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: #eaeaea;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-circle {
+      width: 40px;
+      height: 40px;
+      background-color: #ffc107;
+      color: #000;
+      font-weight: bold;
+      font-size: 22px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .hero {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 60px;
+      background-color: #0d1117;
+      color: #eaeaea;
+    }
+
+    .photo-box {
+      width: 280px;
+      height: 300px;
+      border: 3px solid #ffc107;
+      border-radius: 12px;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 0 15px #ffc10788;
+    }
+
+    .photo-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .upload-btn-outer {
+      display: inline-block;
+      margin-top: 10px;
+      font-size: 22px;
+      background-color: #ffc107;
+      color: #000;
+      padding: 6px 16px;
+      border-radius: 50%;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 0 8px #ffc10755;
+    }
+
+    .hero-left {
+      flex: 1;
+    }
+
+    .hero-right {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn-yellow {
+      background-color: #ffc107;
+      color: #000;
+      font-weight: bold;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .popup-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0,0,0,0.8);
+      justify-content: center;
+      align-items: center;
+      z-index: 99;
+    }
+
+    .popup-overlay.show {
+      display: flex;
+    }
+
+    .popup-content {
+      background: #161b22;
+      padding: 40px;
+      border-radius: 12px;
+      width: 600px;
+      color: #eaeaea;
+      box-shadow: 0 0 20px #00000099;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      font-size: 30px;
+      color: #ffc107;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header/Navbar -->
+  <header>
+    <div class="logo">
+      <div class="logo-circle">R</div>
+      About<span>Me.</span>
+    </div>
+    <nav class="navbar">
+      <a href="index.html" class="active">Home</a>
+      <a href="resume.html">Resume</a>
+      <a href="skills.html">Skills</a>
+      <a href="projects.html">Projects</a>
+      <a href="certifications.html">Certifications</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-left">
+      <h1>Hi, I'm <strong>Rohit</strong></h1>
+      <p class="description">
+        I'm a second-year B.Tech Computer Engineering student at <strong>R.C. Patel Institute of Technology, Shirpur</strong>.<br><br>
+        Passionate about exploring technology, building creative projects, and growing through hands-on experiences.
+      </p>
+      <button class="btn-yellow" onclick="togglePopup()">About Me</button>
+    </div>
+
+    <div class="hero-right">
+      <div class="photo-box" id="photoBox">
+        <img id="profileImage" src="images/rohit-logo.jpg" alt="Profile Photo" />
+      </div>
+      <label for="uploadPhoto" class="upload-btn-outer">+</label>
+      <input type="file" id="uploadPhoto" accept="image/*" style="display:none" onchange="changePhoto(event)" />
+    </div>
+  </section>
+
+  <!-- About Popup -->
+  <div class="popup-overlay" id="popup">
+    <div class="popup-content">
+      <span class="close-btn" onclick="togglePopup()">&times;</span>
+      <h2>About Me</h2>
+      <p>
+        I'm a second-year B.Tech Computer Engineering student at <strong>R.C. Patel Institute of Technology, Shirpur</strong>.<br><br>
+        Passionate about exploring technology, building creative projects, and growing through hands-on experiences. I enjoy teamwork culture, building new connections, and love communicating with people across different domains.
+      </p>
+    </div>
+  </div>
+
+  <!-- JS for Popup and Image Upload -->
+  <script>
+    function togglePopup() {
+      document.getElementById("popup").classList.toggle("show");
+    }
+
+    window.onload = function () {
+      const savedImage = localStorage.getItem("profileImage");
+      if (savedImage) {
+        document.getElementById("profileImage").src = savedImage;
+      }
+    };
+
+    function changePhoto(event) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          document.getElementById("profileImage").src = e.target.result;
+          localStorage.setItem("profileImage", e.target.result);
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+  </script>
+</body>
+</html>

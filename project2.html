@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=1024" />
+  <title>Project 2 | Rohit's Portfolio</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Header/Navbar -->
+  <header>
+    <div class="logo">
+      <img src="images/rohit-logo.jpg" class="circle-logo large-logo" alt="Logo" />
+      About<span>Me.</span>
+    </div>
+    <nav class="navbar">
+      <a href="index.html">Home</a>
+      <a href="resume.html">Resume</a>
+      <a href="skills.html">Skills</a>
+      <a href="projects.html" class="active">Projects</a>
+      <a href="certifications.html">Certifications</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <!-- Project Detail Section -->
+  <section class="project-section">
+    <div class="project-box">
+      <!-- Left Side -->
+      <div class="project-left">
+        <input type="text" id="project2Title" class="input-field project-title" placeholder="Enter Project Title" />
+        <textarea id="project2Description" class="textarea-field" placeholder="Write about the project..."></textarea>
+        <input type="text" id="project2GithubLink" class="input-field" placeholder="GitHub Project Link" />
+        <input type="text" id="project2GithubName" class="input-field" placeholder="Name of GitHub Project" />
+      </div>
+
+      <!-- Right Side -->
+      <div class="project-right">
+        <div class="photo-box upload-photo-frame">
+          <img id="project2Image" src="images/default-project.jpg" alt="Project" />
+          <label for="project2ImageInput" class="upload-btn plus-overlay">+</label>
+          <input type="file" id="project2ImageInput" accept="image/*" style="display:none" onchange="loadProject2Image(event)" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Arrow Navigation -->
+    <div class="project-nav-arrows">
+      <a href="project1.html" class="arrow-btn">←</a>
+    </div>
+  </section>
+
+  <!-- JavaScript -->
+  <script>
+    function saveProject2Data() {
+      localStorage.setItem("project2Title", document.getElementById("project2Title").value);
+      localStorage.setItem("project2Description", document.getElementById("project2Description").value);
+      localStorage.setItem("project2GithubLink", document.getElementById("project2GithubLink").value);
+      localStorage.setItem("project2GithubName", document.getElementById("project2GithubName").value);
+    }
+
+    window.onload = function() {
+      document.getElementById("project2Title").value = localStorage.getItem("project2Title") || "";
+      document.getElementById("project2Description").value = localStorage.getItem("project2Description") || "";
+      document.getElementById("project2GithubLink").value = localStorage.getItem("project2GithubLink") || "";
+      document.getElementById("project2GithubName").value = localStorage.getItem("project2GithubName") || "";
+
+      const savedImage = localStorage.getItem("project2Image");
+      if (savedImage) {
+        document.getElementById("project2Image").src = savedImage;
+      }
+    };
+
+    function loadProject2Image(event) {
+      const file = event.target.files[0];
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const imgSrc = e.target.result;
+        document.getElementById("project2Image").src = imgSrc;
+        localStorage.setItem("project2Image", imgSrc);
+      };
+      if (file) reader.readAsDataURL(file);
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      document.getElementById("project2Title").addEventListener("input", saveProject2Data);
+      document.getElementById("project2Description").addEventListener("input", saveProject2Data);
+      document.getElementById("project2GithubLink").addEventListener("input", saveProject2Data);
+      document.getElementById("project2GithubName").addEventListener("input", saveProject2Data);
+    });
+  </script>
+</body>
+</html>
