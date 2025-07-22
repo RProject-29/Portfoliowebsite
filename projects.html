@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Projects | Rohit's Portfolio</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Header/Navbar -->
+  <header>
+    <div class="logo">
+      <img src="images/rohit-logo.jpg" class="circle-logo large-logo" alt="Logo" />
+      About<span>Me.</span>
+    </div>
+    <nav class="navbar">
+      <a href="index.html">Home</a>
+      <a href="resume.html">Resume</a>
+      <a href="skills.html">Skills</a>
+      <a href="projects.html" class="active">Projects</a>
+      <a href="certifications.html">Certifications</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <!-- Projects Section -->
+  <section class="projects-section">
+    <h2 class="section-title">My Projects</h2>
+
+    <div class="projects-grid">
+      <a href="project1.html" class="project-card">
+        <div class="project-title">Project 1</div>
+      </a>
+      <a href="project2.html" class="project-card">
+        <div class="project-title">Project 2</div>
+      </a>
+    </div>
+  </section>
+
+  <style>
+    .projects-section {
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    .section-title {
+      font-size: 2.2rem;
+      margin-bottom: 40px;
+      color: #f7c600;
+    }
+
+    .projects-grid {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 30px;
+    }
+
+    .project-card {
+      width: 180px;
+      height: 100px;
+      background: #111;
+      color: white;
+      border: 2px solid #f7c600;
+      border-radius: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-decoration: none;
+      font-weight: bold;
+      transition: transform 0.2s ease;
+    }
+
+    .project-card:hover {
+      transform: scale(1.05);
+      background: #222;
+    }
+
+    .project-title {
+      font-size: 1.2rem;
+    }
+
+    @media (max-width: 600px) {
+      .project-card {
+        width: 80%;
+      }
+    }
+  </style>
+</body>
+</html>
