@@ -29,7 +29,33 @@
     <h2 class="certifications-title">My Certifications</h2>
 
     <div class="certification-grid" id="certificationGrid">
-      <!-- Certificates will be rendered here -->
+      <!-- Certificate 1 -->
+      <div class="certification-card">
+        <button class="remove-btn">❌</button>
+        <img src="https://raw.githubusercontent.com/RProject-29/Portfoliowebsite/main/Screenshot_2025-07-09-15-56-41-97_c37d74246d9c81aa0bb824b57eaf7062.jpg" alt="Certificate 1" />
+        <input type="text" value="Certificate 1 Name" placeholder="Certificate Name" />
+      </div>
+
+      <!-- Certificate 2 -->
+      <div class="certification-card">
+        <button class="remove-btn">❌</button>
+        <img src="https://raw.githubusercontent.com/RProject-29/Portfoliowebsite/main/Screenshot_2025-07-09-15-58-35-05_c37d74246d9c81aa0bb824b57eaf7062.jpg" alt="Certificate 2" />
+        <input type="text" value="Certificate 2 Name" placeholder="Certificate Name" />
+      </div>
+
+      <!-- Certificate 3 -->
+      <div class="certification-card">
+        <button class="remove-btn">❌</button>
+        <img src="https://raw.githubusercontent.com/RProject-29/Portfoliowebsite/main/Screenshot_2025-07-09-16-00-32-30_c37d74246d9c81aa0bb824b57eaf7062.jpg" alt="Certificate 3" />
+        <input type="text" value="Certificate 3 Name" placeholder="Certificate Name" />
+      </div>
+
+      <!-- Certificate 4 -->
+      <div class="certification-card">
+        <button class="remove-btn">❌</button>
+        <img src="https://raw.githubusercontent.com/RProject-29/Portfoliowebsite/main/Screenshot_2025-07-09-16-06-03-14_c37d74246d9c81aa0bb824b57eaf7062.jpg" alt="Certificate 4" />
+        <input type="text" value="Certificate 4 Name" placeholder="Certificate Name" />
+      </div>
     </div>
 
     <button class="add-certificate-btn" onclick="addCertificate()">+ Add Certificate</button>
@@ -46,7 +72,7 @@
       createCertificateCard();
     }
 
-    function createCertificateCard(name = '', imageSrc = 'images/default-certificate.jpg') {
+    function createCertificateCard(name = '', imageSrc = '') {
       const grid = document.getElementById('certificationGrid');
 
       const card = document.createElement('div');
@@ -109,5 +135,6 @@
       localStorage.setItem('certificates', JSON.stringify(data));
     }
   </script>
+
 </body>
-</html>
+        </html>
