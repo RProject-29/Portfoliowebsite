@@ -487,3 +487,19 @@
   transform: scale(1.1);
   background-color: #ffca2c;
 }
+
+
+
+
+
+.textarea-field {
+  width: 100%;
+  height: 300px; /* ← Increase this value to make the box taller */
+  resize: none;
+  padding: 12px;
+  font-size: 1rem;
+  background-color: #1e1e1e;
+  color: #fff;
+  border: 1px solid #333;
+  border-radius: 8px;
+}
